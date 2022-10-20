@@ -41,22 +41,22 @@ client.on('ready', () => {
   
     if (interaction.commandName === 'on') {
        
-        if(store.get("lightstatus")=="true"){
+        if(store.get("lightstatus")=="1"){
 
             await interaction.reply('already on');
         }
         else{
-            store.set('lightstatus', 'true'); 
+            store.set('lightstatus', '1'); 
             await interaction.reply('lights are on!');
         }
      
     }
     if (interaction.commandName === 'off') {
-        if(store.get("lightstatus")=="false"){
+        if(store.get("lightstatus")=="0"){
             await interaction.reply('already off');
         }
         else{
-            store.set('lightstatus', 'false'); 
+            store.set('lightstatus', '0'); 
             await interaction.reply('lights are off!');
         }
      
