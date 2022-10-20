@@ -40,7 +40,7 @@ client.on('ready', () => {
     if (!interaction.isChatInputCommand()) return;
   
     if (interaction.commandName === 'on') {
-       
+      console.log(store.get("lightstatus"))
         if(store.get("lightstatus")=="1"){
 
             await interaction.reply('already on');
@@ -52,6 +52,7 @@ client.on('ready', () => {
      
     }
     if (interaction.commandName === 'off') {
+      console.log(store.get("lightstatus"))
         if(store.get("lightstatus")=="0"){
             await interaction.reply('already off');
         }
