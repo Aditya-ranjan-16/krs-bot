@@ -18,7 +18,7 @@ const commands = [
   },
 ];
 
-const rest = new REST({ version: '10' }).setToken("MTAzMjU1NzgyODI4NTY2MTIxNA.GGw4HS.K8cYXU9c3m5kTYUZtPaXFKuDOh9O5xwot0tHFE");
+const rest = new REST({ version: '10' }).setToken("MTAzMjU1NzgyODI4NTY2MTIxNA.GHsBX5.vm3a4vh4vC6ZIHxCzyVsB8BpFGOR2QVN3PkoC4");
 
 (async () => {
   try {
@@ -63,4 +63,4 @@ client.on('ready', () => {
     }
   });
   KeepAlive()
-  client.login("MTAzMjU1NzgyODI4NTY2MTIxNA.GT4wKH.HnsoE4Jf7R_2Smi0G8ii64s5RNpssF6q2Pjjm8");
+  client.login("MTAzMjU1NzgyODI4NTY2MTIxNA.GHsBX5.vm3a4vh4vC6ZIHxCzyVsB8BpFGOR2QVN3PkoC4");
