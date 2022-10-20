@@ -24,9 +24,9 @@ app.use((req, res, next) => {
 
   app.get("/status", (req, res) => {
     if(store.get("lightstatus")=="true"){
-        res.json({status:"on"})
+        res.send(1)
     }else{
-        res.json({status:"off"})
+        res.send(0)
     }
     
   })
