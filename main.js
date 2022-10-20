@@ -18,13 +18,13 @@ const commands = [
   },
 ];
 
-const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
+const rest = new REST({ version: '10' }).setToken("MTAzMjU1NzgyODI4NTY2MTIxNA.GGw4HS.K8cYXU9c3m5kTYUZtPaXFKuDOh9O5xwot0tHFE");
 
 (async () => {
   try {
     console.log('Started refreshing application (/) commands.');
 
-    await rest.put(Routes.applicationCommands(process.env.CID), { body: commands });
+    await rest.put(Routes.applicationCommands("1032557828285661214"), { body: commands });
 
     console.log('Successfully reloaded application (/) commands.');
   } catch (error) {
@@ -63,4 +63,4 @@ client.on('ready', () => {
     }
   });
   KeepAlive()
-  client.login(process.env.token);
+  client.login("MTAzMjU1NzgyODI4NTY2MTIxNA.GGw4HS.K8cYXU9c3m5kTYUZtPaXFKuDOh9O5xwot0tHFE");
