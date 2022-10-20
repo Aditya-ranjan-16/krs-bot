@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 dotenv.config()
 const store = require('data-store')({ path: process.cwd() + '/foo.json' });
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
-store.set('lightstatus', 'false'); 
+store.set('lightstatus', '0'); 
 
 const commands = [
   {
