@@ -24,7 +24,8 @@ app.use((req, res, next) => {
 
   app.get("/status", (req, res) => {
     try{
-        if(store.get("lightstatus")=="true"){
+        
+        if(store.get("lightstatus")=="1"){
             res.send("1")
         }else{
             res.send("0")
