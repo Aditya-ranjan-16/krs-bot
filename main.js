@@ -1,6 +1,8 @@
 const { REST, Routes } = require('discord.js');
 const { Client, GatewayIntentBits } = require('discord.js');
 const KeepAlive=require("./server")
+const dotenv = require("dotenv");
+dotenv.config()
 const store = require('data-store')({ path: process.cwd() + '/foo.json' });
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 store.set('lightstatus', 'false'); 
