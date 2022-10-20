@@ -23,11 +23,16 @@ app.use((req, res, next) => {
   });
 
   app.get("/status", (req, res) => {
-    if(store.get("lightstatus")=="true"){
-        res.send(1)
-    }else{
-        res.send(0)
+    try{
+        if(store.get("lightstatus")=="true"){
+            res.send("1")
+        }else{
+            res.send("0")
+        }
+    }catch(e){
+   console.log(e)
     }
+ 
     
   })
  function KeepAlive(){
