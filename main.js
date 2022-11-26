@@ -14,11 +14,19 @@ store.set('lightstatus', '0');
 const commands = [
   {
     name: 'on',
-    description: 'Replies with Pong!',
+    description: 'KRS Room Lights On ',
   },
   {
     name: 'off',
-    description: 'Replies with Pong!',
+    description: 'KRS Room Lights Off',
+  },
+  {
+    name: 'ac on',
+    description: 'KRS Room AC On',
+  },
+  {
+    name: 'ac off',
+    description: 'KRS Room AC OFF',
   },
 ];
 
@@ -44,6 +52,19 @@ client.on('ready', () => {
     try{
     if (!interaction.isChatInputCommand()) return;
   
+    if (interaction.commandName === 'on') {
+      console.log(store.get("lightstatus"))
+        if(store.get("lightstatus")=="1"){
+
+            await interaction.reply('already on');
+        }
+        else{
+          console.log("was",store.get("lightstatus"))
+            store.set('lightstatus', '1'); 
+            await interaction.reply('lights are on!');
+        }
+     
+    }
     if (interaction.commandName === 'on') {
       console.log(store.get("lightstatus"))
         if(store.get("lightstatus")=="1"){
@@ -92,14 +113,9 @@ app.use((req, res, next) => {
 });
 
 app.get("/status", (req, res) => {
-    console.log(store)
+    console.log(store.get())
   try {
-    console.log("hell=",store.get("lightstatus"))
-    if (store.get("lightstatus") == "1") {
-      res.send("1");
-    } else {
-      res.send("0");
-    }
+     res.json(store.get())
   } catch (e) {
     console.log(e);
   }
