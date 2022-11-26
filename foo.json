@@ -1,4 +1,9 @@
 {
   "lightstatus": "0",
-  "acstatus": "0"
+  "acstatus": [
+    0,
+    0,
+    0,
+    0
+  ]
 }
