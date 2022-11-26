@@ -21,11 +21,11 @@ const commands = [
     description: 'KRS Room Lights Off',
   },
   {
-    name: 'ac on',
+    name: 'ac-on',
     description: 'KRS Room AC On',
   },
   {
-    name: 'ac off',
+    name: 'ac-off',
     description: 'KRS Room AC OFF',
   },
 ];
@@ -52,6 +52,19 @@ client.on('ready', () => {
     try{
     if (!interaction.isChatInputCommand()) return;
   
+    if (interaction.commandName === 'ac-on') {
+      console.log(store.get("acstatus"))
+        if(store.get("acstatus")=="1"){
+
+            await interaction.reply('Ac already on');
+        }
+        else{
+          console.log("was",store.get("acstatus"))
+            store.set('acstatus', '1'); 
+            await interaction.reply('Acs are on!');
+        }
+     
+    }
     if (interaction.commandName === 'on') {
       console.log(store.get("lightstatus"))
         if(store.get("lightstatus")=="1"){
@@ -65,31 +78,18 @@ client.on('ready', () => {
         }
      
     }
-    if (interaction.commandName === 'on') {
-      console.log(store.get("lightstatus"))
-        if(store.get("lightstatus")=="1"){
-
-            await interaction.reply('already on');
-        }
-        else{
-          console.log("was",store.get("lightstatus"))
-            store.set('lightstatus', '1'); 
-            await interaction.reply('lights are on!');
-        }
+    if (interaction.commandName === 'ac-off') {
      
-    }
-    if (interaction.commandName === 'off') {
-     
-        if(store.get("lightstatus")=="0"){
-            await interaction.reply('already off');
-        }
-        else{
-          console.log("was",store.get("lightstatus"))
-            store.set('lightstatus', '0'); 
-            await interaction.reply('lights are off!');
-        }
-     
-    }
+      if(store.get("acstatus")=="0"){
+          await interaction.reply('Ac already off');
+      }
+      else{
+        console.log("was",store.get("acstatus"))
+          store.set('acstatus', '0'); 
+          await interaction.reply('ACs are off!');
+      }
+   
+  }
   }catch(e){
     console.log(e)
   }
