@@ -9,7 +9,7 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const port = process.env.PORT || 5000;
 const app = express();
 app.use(bodyParser.json());
-store.set("lightstatus", "0");
+store.set("lightstatus", 0);
 store.set("acstatus", [0, 0, 0, 0]);
 
 const commands = [
@@ -113,7 +113,7 @@ client.on("interactionCreate", async (interaction) => {
     if (interaction.commandName === "ac-on") {
       const num = interaction.options.get("number").value;
       console.log(store.get("acstatus"));
-      if (store.get("acstatus")[num - 1] == "1") {
+      if (store.get("acstatus")[num - 1] == 1) {
         await interaction.reply(`Ac${num} already on`);
       } else {
         console.log("was", store.get("acstatus"));
@@ -125,17 +125,17 @@ client.on("interactionCreate", async (interaction) => {
     }
     if (interaction.commandName === "on") {
       console.log(store.get("lightstatus"));
-      if (store.get("lightstatus") == "1") {
+      if (store.get("lightstatus") == 1) {
         await interaction.reply("already on");
       } else {
         console.log("was", store.get("lightstatus"));
-        store.set("lightstatus", "1");
+        store.set("lightstatus", 1);
         await interaction.reply("lights are on!");
       }
     }
     if (interaction.commandName === "ac-off") {
       const num = interaction.options.get("number").value;
-      if (store.get("acstatus")[num - 1] == "0") {
+      if (store.get("acstatus")[num - 1] == 0) {
         await interaction.reply(`Ac${num} already off`);
       } else {
         console.log("was", store.get("acstatus"));
@@ -146,11 +146,11 @@ client.on("interactionCreate", async (interaction) => {
       }
     }
     if (interaction.commandName === "off") {
-      if (store.get("lightstatus") == "0") {
+      if (store.get("lightstatus") == 0) {
         await interaction.reply("Light already off");
       } else {
         console.log("was", store.get("lightstatus"));
-        store.set("lightstatus", "0");
+        store.set("lightstatus", 0);
         console.log("is", store.get("lightstatus"));
         await interaction.reply("Light are off!");
       }
