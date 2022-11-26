@@ -90,6 +90,17 @@ client.on('ready', () => {
       }
    
   }
+  if (interaction.commandName === 'off') {
+     
+    if(store.get("lightstatus")=="0"){
+        await interaction.reply('Ac already off');
+    }
+    else{
+      console.log("was",store.get("lightstatus"))
+        store.set('lightstatus', '0'); 
+        await interaction.reply('ACs are off!');
+    }
+}
   }catch(e){
     console.log(e)
   }
