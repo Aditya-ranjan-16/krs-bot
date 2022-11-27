@@ -1,9 +1,10 @@
 {
-  "lightstatus": 0,
+  "lightstatus": [0,0,0,0],
   "acstatus": [
     0,
     0,
     0,
     0
-  ]
+  ],
+  "diwalistatus":0
 }

@@ -9,17 +9,78 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const port = process.env.PORT || 5000;
 const app = express();
 app.use(bodyParser.json());
-store.set("lightstatus", 0);
+store.set("lightstatus", [0, 0, 0, 0]);
 store.set("acstatus", [0, 0, 0, 0]);
+store.set("diwalistatus", 0);
 
 const commands = [
   {
+    name: "diwali-on",
+    description: "KRS Room Lights On ", 
+  },
+  {
+    name: "diwali-off",
+    description: "KRS Room Lights On ", 
+  },
+  {
     name: "on",
     description: "KRS Room Lights On ",
+    options: [
+      {
+        name: "light_no",
+        description: "Which Light?",
+        type: 4,
+        required: true,
+        choices: [
+          {
+            name: "Light-1",
+            value: 1,
+          },
+          {
+            name: "Light-2",
+            value: 2,
+          },
+          {
+            name: "Light-3",
+            value: 3,
+          },
+          {
+            name: "Light-4",
+            value: 4,
+          },
+        ],
+      },
+    ],
   },
   {
     name: "off",
     description: "KRS Room Lights Off",
+    options: [
+      {
+        name: "light_no",
+        description: "Which Light?",
+        type: 4,
+        required: true,
+        choices: [
+          {
+            name: "Light-1",
+            value: 1,
+          },
+          {
+            name: "Light-2",
+            value: 2,
+          },
+          {
+            name: "Light-3",
+            value: 3,
+          },
+          {
+            name: "Light-4",
+            value: 4,
+          },
+        ],
+      },
+    ]
   },
   {
     name: "ac-on",
@@ -109,7 +170,17 @@ client.on("ready", () => {
 client.on("interactionCreate", async (interaction) => {
   try {
     if (!interaction.isChatInputCommand()) return;
-
+     
+    if (interaction.commandName === "diwali-on") {
+      console.log(store.get("diwalistatus"));
+      if (store.get("diwalistatus")== 1) {
+        await interaction.reply(`Already celebrating diwali`);
+      } else {
+        console.log("was", store.get("acstatus"));
+        store.set("diwalistatus", 1);
+        await interaction.reply(`Diwali has come lets celebrate !!`);
+      }
+    }
     if (interaction.commandName === "ac-on") {
       const num = interaction.options.get("number").value;
       console.log(store.get("acstatus"));
@@ -124,13 +195,16 @@ client.on("interactionCreate", async (interaction) => {
       }
     }
     if (interaction.commandName === "on") {
+      const num = interaction.options.get("light_no").value;
       console.log(store.get("lightstatus"));
-      if (store.get("lightstatus") == 1) {
-        await interaction.reply("already on");
+      if (store.get("lightstatus")[num - 1] == 1) {
+        await interaction.reply(`Light-${num} already on`);
       } else {
         console.log("was", store.get("lightstatus"));
-        store.set("lightstatus", 1);
-        await interaction.reply("lights are on!");
+        var curr = store.get("lightstatus");
+        curr[num - 1] = 1;
+        store.set("lightstatus", curr);
+        await interaction.reply(`Light${num} is on!`);
       }
     }
     if (interaction.commandName === "ac-off") {
@@ -142,17 +216,29 @@ client.on("interactionCreate", async (interaction) => {
         var curr = store.get("acstatus");
         curr[num - 1] = 0;
         store.set("acstatus", curr);
-        await interaction.reply(`AC${num} are off!`);
+        await interaction.reply(`AC${num} is off!`);
       }
     }
     if (interaction.commandName === "off") {
-      if (store.get("lightstatus") == 0) {
-        await interaction.reply("Light already off");
+      const num = interaction.options.get("light_no").value;
+      if (store.get("lightstatus")[num - 1] == 0) {
+        await interaction.reply(`Light-${num} already off`);
       } else {
         console.log("was", store.get("lightstatus"));
-        store.set("lightstatus", 0);
-        console.log("is", store.get("lightstatus"));
-        await interaction.reply("Light are off!");
+        var curr = store.get("lightstatus");
+        curr[num - 1] = 0;
+        store.set("lightstatus", curr);
+        await interaction.reply(`Light-${num} is off!`);
+      }
+    }
+    if (interaction.commandName === "diwali-off") {
+      if (store.get("diwalistatus") == 0) {
+        await interaction.reply(`Dieali has already ended`);
+      } else {
+        console.log("was", store.get("diwalistatus"));
+
+        store.set("diwalistatus", 0);
+        await interaction.reply(`it was a joyfull Diwali .. see you next time `);
       }
     }
   } catch (e) {
