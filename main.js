@@ -9,9 +9,6 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const port = process.env.PORT || 5000;
 const app = express();
 app.use(bodyParser.json());
-store.set("lightstatus", [0, 0, 0, 0]);
-store.set("acstatus", [0, 0, 0, 0]);
-store.set("diwalistatus", 0);
 
 const commands = [
   {
