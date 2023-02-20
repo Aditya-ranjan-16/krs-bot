@@ -143,7 +143,7 @@ const commands = [
 
 
 const rest = new REST({ version: "10" }).setToken(
-  "MTAzMjU1NzgyODI4NTY2MTIxNA.GHsBX5.vm3a4vh4vC6ZIHxCzyVsB8BpFGOR2QVN3PkoC4"
+  process.env.TOKEN
 );
 
 (async () => {
@@ -277,5 +277,5 @@ function KeepAlive() {
 
 KeepAlive();
 client.login(
-  "MTAzMjU1NzgyODI4NTY2MTIxNA.GHsBX5.vm3a4vh4vC6ZIHxCzyVsB8BpFGOR2QVN3PkoC4"
+  process.env.TOKEN
 );
